@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Tasks from './components/Tasks'
-import Task from './components/AddTask'
+import AddTask from './components/AddTask'
 import About from './components/About'
+
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false)
@@ -39,7 +40,7 @@ const App = () => {
 const addTask = async (task) => {
   const res = await fetch('http://localhost:5000/tasks', {
     method: 'POST' ,
-    header: {
+    headers: {
       'Content-type': 'application/json'
     },
     body: JSON.stringify(task)
@@ -91,7 +92,7 @@ const toggleReminder = async (id) => {
       <Routes>
       <Route path='/' element={
         <>
-          {showAddTask && <Task onAdd = {addTask} />}
+          {showAddTask && <AddTask onAdd = {addTask} />}
           {tasks.length>0 ? (
             <Tasks 
               tasks={tasks} 
